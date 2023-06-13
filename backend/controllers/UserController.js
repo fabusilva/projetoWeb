@@ -36,6 +36,20 @@ const userController = {
             
         };
     },
+    getEmail: async(req,res) =>{
+        try {
+            const email = req.params.email;
+            const user = await UserModel.findOne({ email: email });
+            if (!user) {
+              res.status(404).json({ msg: "Usuário não encontrado." });
+              return;
+            }
+            res.json(user);
+          } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Ocorreu um erro interno no servidor." });
+          }
+    },
     delete: async(req,res) =>{
         try {
             const id = req.params.id;

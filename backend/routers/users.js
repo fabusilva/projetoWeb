@@ -6,5 +6,6 @@ router.route("/register").get((req,res)=> userController.getAll(req,res));
 router.route("/register/:id").get((req,res) => userController.get(req,res));
 router.route("/register/:id").delete((req,res) => userController.delete(req,res));
 router.route("/register/:id").put((req,res) => userController.update(req,res));
+router.route("/login/:email").get((req,res) => userController.getEmail(req,res));
 
 module.exports = router;
