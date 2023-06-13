@@ -1,0 +1,27 @@
+.divHeader{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.flexContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image{
+    Width:120px;
+    Height:auto;
+}
+.textoHeader{
+    margin-top: 8px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #292524;
+}
