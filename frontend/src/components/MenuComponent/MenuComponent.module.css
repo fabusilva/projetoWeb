@@ -103,8 +103,8 @@ Component outline
 }
 
 .formGroup input {
-  width: 400px;
-  height: 48px;
+  width: 350px;
+  height: 30px;
   top: 29px;
   radius: 4px;
   padding: 14px, 12px, 14px, 12px;

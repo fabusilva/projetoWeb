@@ -1,5 +1,6 @@
 import Menu from "../../components/MenuComponent/MenuComponet";
-import style from './UserRegister.module.css'
+import Header from "../../components/HeaderComponent/HeaderComponent";
+import style from "./UserRegister.module.css";
 import React, { useState } from "react";
 export default function UserRegister() {
   const [name, setName] = useState("");
@@ -15,30 +16,43 @@ export default function UserRegister() {
   return (
     <>
       <Menu />
+      <Header />
       <form className={style.formConteiner} onSubmit={handleSubmit}>
         <div className={style.divConteiner}>
-          <label htmlFor="name">Seu nome</label>
+          <label className={style.labelConteiner} htmlFor="name">
+            Seu nome
+          </label>
           <input
+            className={style.inputConteiner}
             type="text"
             id="name"
+            placeholder="Digite seu primeiro nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className={style.divConteiner}>
-          <label htmlFor="email">Endereço de E-mail</label>
+          <label className={style.labelConteiner} htmlFor="email">
+            Endereço de E-mail
+          </label>
           <input
+            className={style.inputConteiner}
             type="email"
             id="email"
+            placeholder="email@address.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className={style.divConteiner}>
-          <label htmlFor="password">sua senha:</label>
+          <label className={style.labelConteiner} htmlFor="password">
+            Sua senha
+          </label>
           <input
+            className={style.inputConteiner}
             type="password"
             id="password"
+            placeholder="************"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -50,9 +64,9 @@ export default function UserRegister() {
             checked={termsAccepted}
             onChange={(e) => setTermsAccepted(e.target.checked)}
           />
-          <label htmlFor="terms">Aceito os termos de uso</label>
+          <label htmlFor="terms">Li e estou de acordo com o Termo de Uso e <br></br>Politica de privacidade</label>
         </div>
-        <button type="submit">Entrar</button>
+        <button className={style.btEntrar} type="submit">Entrar</button>
       </form>
     </>
   );
