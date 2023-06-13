@@ -1,5 +1,6 @@
+import Menu from '../../components/MenuComponent/MenuComponet';
 export default function Causa(){
     return(
-        <h1></h1>
+        <Menu/>
     )
 }

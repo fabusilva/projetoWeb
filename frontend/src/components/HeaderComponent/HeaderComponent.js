@@ -1,4 +1,4 @@
-import style from './HeaderComponent.mudule.css';
+import style from './HeaderComponent.module.css';
 import logo from '../../img/pageLogo.png';
 
 export default function HeaderComponent(){
