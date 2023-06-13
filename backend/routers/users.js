@@ -1,0 +1,10 @@
+const router = require("express").Router();
+
+const userController = require("../controllers/UserController");
+router.route("/register").post((req,res) =>userController.create(req,res));
+router.route("/register").get((req,res)=> userController.getAll(req,res));
+router.route("/register/:id").get((req,res) => userController.get(req,res));
+router.route("/register/:id").delete((req,res) => userController.delete(req,res));
+router.route("/register/:id").put((req,res) => userController.update(req,res));
+
+module.exports = router;
