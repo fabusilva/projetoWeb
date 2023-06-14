@@ -16,9 +16,6 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
-    image: {
-      type: String,
-    },
     causasContributions: [
       {
         type: Schema.Types.ObjectId,

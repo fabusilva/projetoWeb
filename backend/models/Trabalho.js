@@ -15,9 +15,6 @@ const trabalhoSchema = new Schema({
     address:{
         type: String,
     },
-    image:{
-        type: String,
-    },
     author:{
         type: Schema.Types.ObjectId,
         ref: 'User',

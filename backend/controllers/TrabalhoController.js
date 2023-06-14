@@ -7,6 +7,10 @@ const trabalhoController = {
         title: req.body.title,
         description: req.body.description,
         address: req.body.address,
+        date: req.body.date,
+        author: req.body.author,
+        people: req.body.people,
+        
       };
       const response = await TrabalhoModel.create(trabalho);
       res
