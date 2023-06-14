@@ -1,9 +1,9 @@
-const { Trabalho: TrabalhoModel } = require("../models/Trabalho");
+const { Trabalho: CausaModel } = require("../models/Causa");
 
-const trabalhoController = {
+const causaController = {
   create: async (req, res) => {
     try {
-      const trabalho = {
+      const causa = {
         title: req.body.title,
         description: req.body.description,
         address: req.body.address,
@@ -11,10 +11,10 @@ const trabalhoController = {
         author: req.body.author,
         people: req.body.people,
       };
-      const response = await TrabalhoModel.create(trabalho);
+      const response = await CausaModel.create(causa);
       res
         .status(201)
-        .json({ response, msg: "Trabalho " + response.title + " criado!" });
+        .json({ response, msg: "Causa " + response.title + " criada!" });
     } catch (error) {
       console.log(error);
     }
@@ -22,13 +22,15 @@ const trabalhoController = {
   delete: async (req, res) => {
     try {
       const id = req.params.id;
-      const trabalho = await TrabalhoModel.findById(id);
-      if (!trabalho) {
+      const causa = await CausaModel.findById(id);
+      if (!causa) {
         res.status(404).json({ msg: "Id não encontrado" });
         return;
       }
-      const deleteTrabalho = await TrabalhoModel.findByIdAndDelete(id);
-      res.status(200).json({ deleteTrabalho, msg: "Trabalho apagado!" });
+      const deleteCausa = await CausaModel.findByIdAndDelete(id);
+      res
+        .status(200)
+        .json({ deleteTrabalho: deleteCausa, msg: "Causa apagada!" });
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +38,7 @@ const trabalhoController = {
   update: async (req, res) => {
     try {
       const id = req.params.id;
-      const trabalho = {
+      const causa = {
         title: req.body.title,
         description: req.body.description,
         address: req.body.address,
@@ -44,23 +46,20 @@ const trabalhoController = {
         author: req.body.author,
         people: req.body.people,
       };
-      const updateTrabalho = await TrabalhoModel.findByIdAndUpdate(
-        id,
-        trabalho
-      );
-      if (!updateTrabalho) {
+      const updateCausa = await CausaModel.findByIdAndUpdate(id, causa);
+      if (!updateCausa) {
         res.status(404).json({ msg: "Id não encontrado." });
         return;
       }
-      res.status(200).json({ trabalho, msg: "Trabalho atualizado!" });
+      res.status(200).json({ causa, msg: "Trabalho atualizado!" });
     } catch (error) {
       console.log(error);
     }
   },
   getAll: async (req, res) => {
     try {
-      const trabalho = await TrabalhoModel.find();
-      res.json(trabalho);
+      const causa = await CausaModel.find();
+      res.json(causa);
     } catch (error) {
       console.log(error);
     }
@@ -68,15 +67,15 @@ const trabalhoController = {
   get: async (req, res) => {
     try {
       const id = req.params.id;
-      const trabalho = await TrabalhoModel.findById(id);
-      if (!trabalho) {
+      const causa = await CausaModel.findById(id);
+      if (!causa) {
         res.status(404).json({ msg: "Id não encontrado" });
         return;
       }
-      res.json(trabalho);
+      res.json(causa);
     } catch (error) {
       console.log(error);
     }
   },
 };
-module.exports = trabalhoController;
+module.exports = causaController;

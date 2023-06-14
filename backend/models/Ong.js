@@ -20,9 +20,6 @@ const ongSchema = new Schema({
     address:{
         type: String,
     },
-    image:{
-        type: String,
-    },
     password:{
         type: String,
         require: true,

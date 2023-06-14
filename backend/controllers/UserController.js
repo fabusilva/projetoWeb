@@ -1,4 +1,4 @@
-const { User: UserModel} = require("../models/User");
+const { User: UserModel } = require("../models/User");
 const { Causa: CausaModel } = require("../models/Causa");
 const { Trabalho: TrabalhoModel } = require("../models/Trabalho");
 
@@ -78,6 +78,8 @@ const userController = {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        causasContributions: req.body.causasContributions,
+        trabalhosContributions: req.body.trabalhosContributions,
       };
       const updateUser = await UserModel.findByIdAndUpdate(id, user);
       if (!updateUser) {
