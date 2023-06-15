@@ -4,8 +4,9 @@ async function main(){
     try {
 
         mongoose.set("strictQuery",true);
-
-        await mongoose.connect('mongodb://127.0.0.1:27017/node');
+        //fals
+        //MNJiW6IWLjweK206
+        await mongoose.connect('mongodb+srv://fals:MNJiW6IWLjweK206@cluster0.tqr9pz7.mongodb.net/?retryWrites=true&w=majority');
         console.log("conectado ao mongodb");
     } catch (error) {
         console.log(`Error: ${error}`);

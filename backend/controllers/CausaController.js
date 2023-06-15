@@ -1,4 +1,4 @@
-const { Trabalho: CausaModel } = require("../models/Causa");
+const { Causa: CausaModel } = require("../models/Causa");
 
 const causaController = {
   create: async (req, res) => {
