@@ -1,13 +1,16 @@
 const { Ong: OngModel } = require("../models/Ong");
-
+const { Causa: CausaModel } = require("../models/Causa");
+const bcrypt = require('bcrypt');
 const ongController = {
   create: async (req, res) => {
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(req.body.password,salt);
     try {
       const ong = {
         name: req.body.name,
         email: req.body.email,
         cnpj: req.body.cnpj,
-        password: req.body.password,
+        password: passwordHash,
 
         description: req.body.description,
         address: req.body.address,
@@ -81,5 +84,25 @@ const ongController = {
       console.log(error);
     }
   },
+  addCausas: async(req,res) =>{
+    try {
+      const ongId = req.params.id;
+      const causaId = req.body.id;
+
+      const ong = await OngModel.findById(ongId);
+      if(!ong){
+        return res.status(404).json({error:"ONG não encontrada"});
+      }
+      const causa = await CausaModel.findById(causaId);
+      if(!causa){
+        return res.status(404).json({error:"Causa não encontrada"});
+      }
+      ong.causas.push(causaId);
+      await ong.save();
+      res.status(200).json({ message: "Operação realizada com sucesso" });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 module.exports = ongController;

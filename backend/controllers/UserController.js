@@ -1,14 +1,16 @@
 const { User: UserModel } = require("../models/User");
 const { Causa: CausaModel } = require("../models/Causa");
 const { Trabalho: TrabalhoModel } = require("../models/Trabalho");
-
+const bcrypt = require('bcrypt');
 const userController = {
   create: async (req, res) => {
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(req.body.password,salt);
     try {
       const user = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: passwordHash,
         causasContributions: req.body.causasContributions,
         trabalhosContributions: req.body.trabalhosContributions,
       };

@@ -1,4 +1,5 @@
 const { Trabalho: TrabalhoModel } = require("../models/Trabalho");
+const { User: UserModel } = require("../models/User");
 
 const trabalhoController = {
   create: async (req, res) => {
@@ -78,5 +79,24 @@ const trabalhoController = {
       console.log(error);
     }
   },
+  addPerson: async (req,res) =>{
+    try {
+      const trabalhoId =req.params.id;
+      const userId = req.body.id
+
+      const trabalho = await TrabalhoModel.findById(trabalhoId);
+      if(!trabalho){
+        return res.status(404).json({error: "Trabalho não encontrado"});
+      }
+      const user = await UserModel.findById(userId);
+      if(!user){
+        return res.status(404).json({error: "Usuario não encontrado"});
+      }
+      trabalho.people.push(userId);
+      await trabalho.save();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 module.exports = trabalhoController;

@@ -26,11 +26,25 @@ export default function Trabalho() {
       console.log(error);
     }
   }
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [endereco, setEndereco] = useState("");
-  const [id,setId] = setId("");
+  const [id, setId] = useState("");
+  
+
+  async function update(id){
+    console.log(id);
+    const trab =await axios.get(`http://localhost:3000/api/trabalho/${id}`);
+    const dados = trab.data;
+    setId(dados._id);
+    setTitle(dados.title);
+    setEndereco(dados.address);
+    setDescription(dados.description);
+    console.log(trab.data);
+    openPopup();
+  }
+
+  //const [id,setId] = setId("");
 
   const handleCausa = async (e) => {
     e.preventDefault();
@@ -41,14 +55,12 @@ export default function Trabalho() {
       address: endereco,
     });
   };
+  
   //popup de formulario +update
   const [isOpen, setIsOpen] = useState(false);
 
   const openPopup = () => {
     setIsOpen(true);
-    setTitle("ola")
-    setDescription("olaa")
-    setEndereco("aaaa")
   };
 
   const closePopup = () => {
@@ -68,8 +80,7 @@ export default function Trabalho() {
               <p>{trabalho.description}</p>
               <p>{trabalho.address}</p>
               <p>{trabalho._id}</p>
-              onChange={(e) => setTitle(trabalho._id)}
-              <button onClick={openPopup}>Update</button>
+              <button onClick={() => update(trabalho._id)}>Update</button>
               <button onClick={() => deletando(trabalho._id)}>Delete</button>
             </div>
           ))
@@ -81,6 +92,17 @@ export default function Trabalho() {
             <div className={style.popup}>
               <div className={style.formContainer}>
                 <form>
+                <div className={style.invisible}>
+                    <label htmlFor="id">Id do trabalho</label>
+                    <input
+                      type="text"
+                      id="id"
+                      name="id"
+                      value={id}
+                      required
+                      onChange={(e) => setId(e.target.value)}
+                    />
+                  </div>
                   <div className={style.formGroup}>
                     <label htmlFor="title">Titulo do trabalho</label>
                     <input
@@ -101,6 +123,7 @@ export default function Trabalho() {
                       name="description"
                       placeholder="Faça uma descrição do trabalho"
                       required
+                      value={description}
                       onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
@@ -112,6 +135,7 @@ export default function Trabalho() {
                       name="endereco"
                       placeholder="Endereço do local"
                       required
+                      value={endereco}
                       onChange={(e) => setEndereco(e.target.value)}
                     />
                   </div>

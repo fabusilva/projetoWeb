@@ -26,15 +26,18 @@ export default function MenuComponent() {
           alt="Ajudei"
           onClick={logoClick}
         />
-        <div>
-          <button className={style.btText}>Sobre nós</button>
-          <Link to="/Ongs">Ongs</Link>
-          <Link to="/Tabalho">Trabalhos</Link>
+        <div className={style.linkConteiner}>
+          <Link className = {style.linkMenu} to= "/Causas">Causas</Link>
+          <Link className = {style.linkMenu} to="/Ongs">Ongs</Link>
+          <Link className = {style.linkMenu} to="/Tabalho">Trabalhos</Link>
           <button className={style.btEntrar} onClick={openPopup}>
             Entrar
           </button>
         </div>
       </nav>
+
+      {/*popup de login*/}
+
       <div>
         {isOpen && (
           <div className={style.overlay}>
@@ -69,14 +72,14 @@ export default function MenuComponent() {
                       required
                     />
                   </div>
-                  <div className={style.formGroup}>
-                    <button type="submit">Entrar</button>
+                  <div className={style.conteinerLogin}>
+                    <button className={style.btLogin} type="submit">Entrar</button>
                   </div>
                 </form>
-              </div>
               <Link className={style.link} to="/Register">
                 Não tem uma conta? Clique aqui!
               </Link>
+              </div>
               <button className={style.btfechar} onClick={closePopup}>
                 X
               </button>

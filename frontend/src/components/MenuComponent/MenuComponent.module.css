@@ -17,12 +17,19 @@
   background: #fbbf24;
   border-bottom: 2px solid #57534e;
 }
-.menu div {
+
+.imagem {
+  width: 48px;
+  height: auto;
+}
+
+.linkConteiner {
   justify-content: flex-end;
 }
 
-.menu div button {
-  margin-left: 40px; /* Add spacing between buttons */
+.linkMenu {
+  text-decoration: none;
+  padding-left: 40px;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
@@ -31,12 +38,8 @@
   text-align: center;
 }
 
-.btText {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
 .btEntrar {
+  margin-left: 40px;
   background: #292524;
   border-radius: 6px;
   width: 71px;
@@ -72,23 +75,41 @@
   padding: 20px;
   border-radius: 5px;
   background: #f5f5f4;
-  /* Stone/600
-
-Component outline
-*/
-  //border: 1px solid #57534E;
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
 }
+
+.flexContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagempopup {
+  width: 90px;
+  height: auto;
+  margin-bottom: 0px;
+}
+
+.text {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  color: #292524;
+  margin-bottom: 32px;
+}
+
 .formContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  //height: 100%;
 }
 
 /* Estilos opcionais para o formulário de login */
@@ -113,46 +134,28 @@ Component outline
   border: 1px solid #57534e;
   vertical-align: middle;
 }
-
-.formGroup button {
+.conteinerLogin{
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.btLogin{
+  display: inline-block;
   padding: 14px 12px;
-  width: 200px;
+  width: 150px;
   height: 48px;
   background: #fbbf24;
   border-radius: 25px;
   border: none;
-}
-
-.imagem {
-  width: 48px;
-  height: auto;
-}
-.flexContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.imagempopup {
-  width: 90px;
-  height: auto;
-  margin-bottom: 0px;
-}
-.text {
-  font-family: "Roboto";
+  font-family: inherit;
   font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 16px;
-  text-align: center;
-
-  /* Stone/800 */
-
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
   color: #292524;
-  margin-bottom: 32px;
 }
 
 .link {
@@ -165,9 +168,16 @@ Component outline
 }
 
 .btfechar {
-  width: 40px;
+  width: 50px;
   height: auto;
   position: absolute;
   top: 0px;
   right: 0px;
+  border: none; /* remover borda */
+  background-color: red; /* remover cor de fundo */
+  color: #FFFFFF; /* herdar a cor do texto do elemento pai */
+  font-family: inherit; /* herdar a família de fontes do elemento pai */
+  font-size: inherit; /* herdar o tamanho de fonte do elemento pai */
+  padding: 0; /* remover preenchimento interno */
+  margin: 0; /* remover margens */
 }
