@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const loginController = {
     findRegister: async(req,res) =>{
         try {
+            var secret;
             var usuario;
             const email = req.body.email;
             const password = req.body.password;
@@ -16,6 +17,7 @@ const loginController = {
                     return;
                 }
                 usuario = user;
+                secret = process.env.SECRET_USER
             } else {
                 const ong = await OngModel.findOne({email:email});
                 if(ong){
@@ -25,13 +27,14 @@ const loginController = {
                         return;
                     }
                     usuario = ong;
+                    secret = process.env.SECRET_ONG
                 }else{
                     res.status(404).json({ msg: "Email não encontrado." });
                     return;
                 }
             }
 
-            const secret = process.env.SECRET;
+            //const secret = process.env.SECRET;
             const token = jwt.sign({
                 id: usuario._id
             },secret,)

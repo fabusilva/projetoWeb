@@ -7,10 +7,11 @@ function checkToken(req,res,next){
         if(!token){
             return res.status(401).json({msg:"Acesso negado!!!"})
         }
-        const secret = process.env.SECRET;
+        const secret = process.env.SECRET_USER;
         jwt.verify(token,secret);
         next();
     } catch (error) {
+        res.status(401).json({ error: 'Token JWT inválido' });
         console.log(error);
     }
 }
