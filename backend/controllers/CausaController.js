@@ -1,4 +1,5 @@
 const { Causa: CausaModel } = require("../models/Causa");
+const { User: UserModel } = require("../models/User");
 
 const causaController = {
   create: async (req, res) => {
@@ -77,5 +78,24 @@ const causaController = {
       console.log(error);
     }
   },
+  addPerson: async (req,res) =>{
+    try {
+      const causaId =req.params.id;
+      const userId = req.body.id
+
+      const causa = await CausaModel.findById(causaId);
+      if(!causa){
+        return res.status(404).json({error: "Trabalho não encontrado"});
+      }
+      const user = await UserModel.findById(userId);
+      if(!user){
+        return res.status(404).json({error: "Usuario não encontrado"});
+      }
+      causa.people.push(userId);
+      await causa.save();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 module.exports = causaController;

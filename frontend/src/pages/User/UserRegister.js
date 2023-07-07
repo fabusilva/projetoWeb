@@ -1,17 +1,29 @@
+import { useState } from "react";
 import Menu from "../../components/MenuComponent/MenuComponet";
 import Header from "../../components/HeaderComponent/HeaderComponent";
 import style from "./UserRegister.module.css";
-import React, { useState } from "react";
+import axios from "axios";
+
 export default function UserRegister() {
+  
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica para lidar com o envio do formulário
-    // e fazer as validações necessárias antes de enviar os dados.
+    try {
+      console.log(name, email, password)
+      await axios.post('http://localhost:4000/api/register', {name:name,email:email,password:password});
+      const response = await axios.get(`http://localhost:4000/api/login/${email}/${password}`);
+      console.log(response);
+      //window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+      alert("Usuario não cadastrado!")
+    }
   };
   return (
     <>

@@ -1,0 +1,91 @@
+/* Estilo para o contêiner principal */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-top: 100px;
+  }
+  
+  /* Estilo para o título */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para os campos de entrada */
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo para os botões */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilo para o carrossel */
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .carousel {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-item {
+    flex: 0 0 200px; /* Largura dos itens do carrossel */
+    margin-right: 10px; /* Espaçamento entre os itens */
+  }
+  
+  .carousel-item button {
+    margin-top: 10px;
+  }
+  
+  /* Estilo para os botões de navegação do carrossel */
+  .carousel-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .carousel-nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .carousel-nav button:focus {
+    outline: none;
+  }
+  
+  /* Estilo para o botão de próxima */
+  .carousel-next {
+    margin-left: 10px;
+  }
+  
+  /* Estilo para o botão anterior */
+  .carousel-prev {
+    margin-right: 10px;
+  }
+  

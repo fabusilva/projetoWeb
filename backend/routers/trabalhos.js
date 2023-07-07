@@ -5,18 +5,23 @@ function checkToken(req,res,next){
         const authHeader = req.headers['authorization'];
         const token = authHeader && authHeader.split(' ')[1];
         if(!token){
-            return res.status(401).json({msg:"Acesso negado!!!"})
+            return res.status(401).json({msg:"Acesso negado!!!"});
         }
         const secret = process.env.SECRET_USER;
-        jwt.verify(token,secret);
-        next();
+        jwt.verify(token,secret, (error, decoded) =>{
+            if(error){
+                return res.sendStatus(403)
+            }
+            //req.usuario.email = decoded.email   
+            next();
+        });
     } catch (error) {
         res.status(401).json({ error: 'Token JWT inválido' });
         console.log(error);
     }
 }
 const trabalhoController = require("../controllers/TrabalhoController");
-router.route("/trabalho").post(checkToken, (req,res) => trabalhoController.create(req,res));
+router.route("/trabalho").post((req,res) => trabalhoController.create(req,res));
 router.route("/trabalho").get((req,res) => trabalhoController.getAll(req,res));
 router.route("/trabalho/:id").get((req,res) => trabalhoController.get(req,res));
 router.route("/trabalho/:id").put((req,res)=> trabalhoController.update(req,res));

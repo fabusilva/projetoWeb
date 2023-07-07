@@ -18,6 +18,9 @@ const trabalhoController = {
         .json({ response, msg: "Trabalho " + response.title + " criado!" });
     } catch (error) {
       console.log(error);
+      res
+        .status(401)
+        .json({ msg: "Erro ao cadastrar trabalho" });
     }
   },
   delete: async (req, res) => {
@@ -56,6 +59,8 @@ const trabalhoController = {
       res.status(200).json({ trabalho, msg: "Trabalho atualizado!" });
     } catch (error) {
       console.log(error);
+      res.status(500).json({ msg: "Não foi possivel encontrar trabalho." });
+        return;
     }
   },
   getAll: async (req, res) => {

@@ -6,7 +6,7 @@ async function main(){
         mongoose.set("strictQuery",true);
         //fals
         //MNJiW6IWLjweK206
-        await mongoose.connect('mongodb+srv://fals:MNJiW6IWLjweK206@cluster0.tqr9pz7.mongodb.net/?retryWrites=true&w=majority');
+        await mongoose.connect('mongodb+srv://fals:MNJiW6IWLjweK206@cluster0.tqr9pz7.mongodb.net/node');
         console.log("conectado ao mongodb");
     } catch (error) {
         console.log(`Error: ${error}`);

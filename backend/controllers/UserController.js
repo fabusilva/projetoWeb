@@ -20,6 +20,9 @@ const userController = {
         .json({ response, msg: "Usuario " + response.name + " Criado" });
     } catch (error) {
       console.log(error);
+      res
+        .status(401)
+        .json({ msg: "Erro ao cadastrar usuario" });
     }
   },
   getAll: async (req, res) => {
@@ -74,12 +77,14 @@ const userController = {
     }
   },
   update: async (req, res) => {
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(req.body.password,salt);
     try {
       const id = req.params.id;
       const user = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: passwordHash,
         causasContributions: req.body.causasContributions,
         trabalhosContributions: req.body.trabalhosContributions,
       };

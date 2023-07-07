@@ -2,11 +2,37 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import style from "./MenuComponent.module.css";
 import logo from "../../img/pageLogo.png";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+
 export default function MenuComponent() {
+  const {setAuth} = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    try {
+    const response = await axios.get(`http://localhost:4000/api/login/${email}/${password}`);
+    const data = response?.data;
+    const roles = data?.roles;
+    const token = data?.token;
+    const user = data?.usuario;
+    setAuth({user,roles,token});
+    console.log("Tipo de usuario:",roles,"\nToken: ",token);
+    } catch (error) {
+      console.log(error);
+      if(!error?.response){
+        alert("Servidor fora do ar!!!")
+      }else if(error.response?.status === 404){
+        alert("Email ou senha incorretos!!!!")
+      }else{
+        alert("Login falhou")
+      }
+    }
+  };
   const logoClick = () => {
-    // Lógica para redirecionar para a home
-    // Exemplo:
-    window.location.href = "/"; // Redireciona para a página inicial
+    window.location.href = "/";
   };
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,9 +82,11 @@ export default function MenuComponent() {
                     <label htmlFor="username">Endereço de E-mail</label>
                     <input
                       type="email"
-                      id="username"
-                      name="username"
+                      id="email"
+                      name="email"
                       placeholder="email@address.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
@@ -69,11 +97,13 @@ export default function MenuComponent() {
                       id="password"
                       name="password"
                       placeholder="***************"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                   </div>
                   <div className={style.conteinerLogin}>
-                    <button className={style.btLogin} type="submit">Entrar</button>
+                    <button className={style.btLogin} type="submit" onClick={(e) =>handleLogin(e)}>Entrar</button>
                   </div>
                 </form>
               <Link className={style.link} to="/Register">

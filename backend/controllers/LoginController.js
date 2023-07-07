@@ -7,8 +7,9 @@ const loginController = {
         try {
             var secret;
             var usuario;
-            const email = req.body.email;
-            const password = req.body.password;
+            var role;
+            const email = req.params.email;
+            const password = req.params.password;
             const user = await UserModel.findOne({email:email});
             if(user){
                 const userPassword = await bcrypt.compare(password,user.password);
@@ -16,6 +17,7 @@ const loginController = {
                     res.status(404).json({ msg: "Senha não encontrada." });
                     return;
                 }
+                role = "user";
                 usuario = user;
                 secret = process.env.SECRET_USER
             } else {
@@ -26,6 +28,7 @@ const loginController = {
                         res.status(404).json({ msg: "Senha não encontrada." });
                         return;
                     }
+                    role = "ong";
                     usuario = ong;
                     secret = process.env.SECRET_ONG
                 }else{
@@ -33,12 +36,9 @@ const loginController = {
                     return;
                 }
             }
-
-            //const secret = process.env.SECRET;
-            const token = jwt.sign({
-                id: usuario._id
-            },secret,)
-            res.status(200).json({usuario,msg:"Login realizado com sucesso ",token});
+            res.cookie('jwm',usuario.email,{HttpOnly:true, maxAge: 24*60*60*1000});
+            const token = jwt.sign({email: usuario.email},secret);
+            res.status(200).json({roles:role,usuario,msg:"Login realizado com sucesso ",token});
         } catch (error) {
             console.log(error);
         }

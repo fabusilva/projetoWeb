@@ -25,13 +25,15 @@ const ongController = {
     }
   },
   update: async (req, res) => {
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(req.body.password,salt);
     try {
       const id = req.params.id;
       const ong = {
         name: req.body.name,
         email: req.body.email,
         cnpj: req.body.cnpj,
-        password: req.body.password,
+        password: passwordHash,
 
         description: req.body.description,
         address: req.body.address,
